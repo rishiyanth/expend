@@ -3,21 +3,30 @@
   <mat-sidenav-container class="example-container">
     <mat-sidenav mode="side" opened position="end" #rightnav class="rightnavcontent">
       
-      <div>
-        <button mat-raised-button color="primary" (click)="rightnav.toggle()">Close</button>
+      <div class="sidenav-header">
+        <mat-icon aria-hidden="false" aria-label="close" fontIcon="close" (click)="rightnav.toggle()"></mat-icon>
+        <p *ngIf="cashIn">Cash In</p>
+        <p *ngIf="cashOut">Cash Out</p>
       </div>
 
+      <mat-divider class="divider"></mat-divider>
+
+      <!-- Cash In Section -->
+
       <div *ngIf="cashIn">
-        <p>Cash In</p>
-        <button mat-raised-button color="primary">Add</button>
+          <app-cashform></app-cashform>
       </div>
+
+      <!-- Cash Out Section -->
       
       <div *ngIf="cashOut">
-        <p>Cash Out</p>
-        <button mat-raised-button color="primary">Add</button>
+        <app-cashform></app-cashform>
       </div>
       
     </mat-sidenav>
+
+    <!-- MAIN CONTENT -->
+
     <mat-sidenav-content>
 
       <mat-card>
@@ -62,45 +71,4 @@
     <mat-drawer-content>Main content</mat-drawer-content>
   </mat-drawer-container> -->
 
-
 </div>
-
-
-<!-- <div class="container"> -->
-
-  <!-- <h1>Main Content</h1> -->
-  <!-- <button type="button" class="btn btn-primary" (click)="openModal(template)">Create template modal</button>
-
-  <ng-template #template>
-    <div class="modal-header">
-      <h4 class="modal-title pull-left">Modal</h4>
-      <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="modalRef?.hide()">
-        <span aria-hidden="true" class="visually-hidden">&times;</span>
-      </button>
-    </div>
-    <div class="modal-body">
-      This is a modal.
-    </div>
-  </ng-template> -->
-
-  <!-- <mat-drawer-container class="example-container">
-    <mat-drawer mode="side" opened>Drawer content</mat-drawer>
-    <mat-drawer-content>
-      <h1>Main Content</h1>
-      <button type="button" class="btn btn-primary" (click)="openModal(template)">Create template modal</button>
- 
-      <ng-template #template>
-        <div class="modal-header">
-          <h4 class="modal-title pull-left">Modal</h4>
-          <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="modalRef?.hide()">
-            <span aria-hidden="true" class="visually-hidden">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          This is a modal.
-        </div>
-      </ng-template>
-    </mat-drawer-content>
-  </mat-drawer-container> -->
-
-<!-- </div> -->

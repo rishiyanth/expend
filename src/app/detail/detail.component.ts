@@ -12,6 +12,8 @@ export class DetailComponent implements OnInit {
   cashIn = true;
   cashOut = false;
 
+  mytime = new Date();
+
   constructor() { }
 
   ngOnInit(): void {
