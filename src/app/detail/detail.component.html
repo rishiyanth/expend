@@ -1,7 +1,106 @@
-<div class="container">
-  <h1 class="title">
-    {{ 'PAGES.DETAIL.TITLE' | translate }}
-  </h1>
+<div>
 
-  <a routerLink="/">{{ 'PAGES.DETAIL.BACK_TO_HOME' | translate }}</a>
+  <mat-sidenav-container class="example-container">
+    <mat-sidenav mode="side" opened position="end" #rightnav class="rightnavcontent">
+      
+      <div>
+        <button mat-raised-button color="primary" (click)="rightnav.toggle()">Close</button>
+      </div>
+
+      <div *ngIf="cashIn">
+        <p>Cash In</p>
+        <button mat-raised-button color="primary">Add</button>
+      </div>
+      
+      <div *ngIf="cashOut">
+        <p>Cash Out</p>
+        <button mat-raised-button color="primary">Add</button>
+      </div>
+      
+    </mat-sidenav>
+    <mat-sidenav-content>
+
+      <mat-card>
+        <button mat-raised-button color="primary" (click)="toggleCashIn()" (click)="rightnav.toggle()">Cash In</button>
+        <button mat-raised-button color="warn" (click)="toggleCashOut()" (click)="rightnav.toggle()">Cash Out</button>
+      </mat-card>
+    
+      <mat-accordion>
+        <mat-expansion-panel hideToggle>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              This is the expansion title
+            </mat-panel-title>
+            <mat-panel-description>
+              This is a summary of the content
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <p>This is the primary content of the panel.</p>
+        </mat-expansion-panel>
+        <mat-expansion-panel (opened)="panelOpenState = true"
+                             (closed)="panelOpenState = false">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Self aware panel
+            </mat-panel-title>
+            <mat-panel-description>
+              Currently I am {{panelOpenState ? 'open' : 'closed'}}
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <p>I'm visible because I am open</p>
+        </mat-expansion-panel>
+      </mat-accordion>
+    
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+  
+
+  <!-- <mat-drawer-container class="example-container">
+    <mat-drawer mode="side" opened>
+      <button mat-raised-button color="primary">Primary</button>
+    </mat-drawer>
+    <mat-drawer-content>Main content</mat-drawer-content>
+  </mat-drawer-container> -->
+
+
 </div>
+
+
+<!-- <div class="container"> -->
+
+  <!-- <h1>Main Content</h1> -->
+  <!-- <button type="button" class="btn btn-primary" (click)="openModal(template)">Create template modal</button>
+
+  <ng-template #template>
+    <div class="modal-header">
+      <h4 class="modal-title pull-left">Modal</h4>
+      <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="modalRef?.hide()">
+        <span aria-hidden="true" class="visually-hidden">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      This is a modal.
+    </div>
+  </ng-template> -->
+
+  <!-- <mat-drawer-container class="example-container">
+    <mat-drawer mode="side" opened>Drawer content</mat-drawer>
+    <mat-drawer-content>
+      <h1>Main Content</h1>
+      <button type="button" class="btn btn-primary" (click)="openModal(template)">Create template modal</button>
+ 
+      <ng-template #template>
+        <div class="modal-header">
+          <h4 class="modal-title pull-left">Modal</h4>
+          <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="modalRef?.hide()">
+            <span aria-hidden="true" class="visually-hidden">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          This is a modal.
+        </div>
+      </ng-template>
+    </mat-drawer-content>
+  </mat-drawer-container> -->
+
+<!-- </div> -->

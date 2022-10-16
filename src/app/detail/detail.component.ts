@@ -7,10 +7,25 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DetailComponent implements OnInit {
 
+  panelOpenState = false;
+
+  cashIn = true;
+  cashOut = false;
+
   constructor() { }
 
   ngOnInit(): void {
     console.log('DetailComponent INIT');
-   }
+  }
+
+  toggleCashIn(){
+    this.cashIn = true;
+    this.cashOut = false;
+  }
+
+  toggleCashOut(){
+    this.cashIn = false;
+    this.cashOut = true;
+  }
 
 }
