@@ -19,6 +19,7 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatDividerModule} from '@angular/material/divider';
 import { CashformComponent } from './cashform/cashform/cashform.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
 
 
 @NgModule({
@@ -39,7 +40,8 @@ import { ReactiveFormsModule } from '@angular/forms';
       TimepickerModule,
       MatIconModule,
       MatDividerModule,
-      ReactiveFormsModule
+      ReactiveFormsModule,
+      MatButtonToggleModule
   ]
 })
 export class DetailModule {}

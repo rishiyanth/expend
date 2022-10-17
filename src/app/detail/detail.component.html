@@ -5,24 +5,23 @@
       
       <div class="sidenav-header">
         <mat-icon aria-hidden="false" aria-label="close" fontIcon="close" (click)="toggleRightNav()"></mat-icon>
-        <p *ngIf="cashIn">Cash In</p>
-        <p *ngIf="cashOut">Cash Out</p>
+        <p>Add entry</p>
       </div>
 
       <mat-divider class="divider"></mat-divider>
 
-      <!-- Cash In Section -->
-
-      <div *ngIf="cashIn">
+      <div >
+        <div class="form-group">
+          <mat-button-toggle-group name="fontStyle" aria-label="Font Style">
+              <mat-button-toggle value="bold">+ Cash In</mat-button-toggle>
+              <mat-button-toggle value="italic">- Cash Out</mat-button-toggle>
+          </mat-button-toggle-group>
+        </div>
+        <br>
+        <div>
           <app-cashform (toggleRightNav)="toggleRightNav()"></app-cashform>
-      </div>
-
-      <!-- Cash Out Section -->
-      
-      <div *ngIf="cashOut">
-        <app-cashform (toggleRightNav)="toggleRightNav()"></app-cashform>
-      </div>
-      
+        </div>
+      </div>  
     </mat-sidenav>
 
     <!-- MAIN CONTENT -->
@@ -30,8 +29,7 @@
     <mat-sidenav-content>
 
       <mat-card>
-        <button mat-raised-button color="primary" (click)="toggleCashIn()" (click)="toggleRightNav()">Cash In</button>
-        <button mat-raised-button color="accent" (click)="toggleCashOut()" (click)="toggleRightNav()">Cash Out</button>
+        <button mat-raised-button color="primary" (click)="toggleCashIn()" (click)="toggleRightNav()">Add entry</button>
       </mat-card>
     
       <mat-accordion>
