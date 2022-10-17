@@ -8,9 +8,9 @@ import { Component, OnInit } from '@angular/core';
 export class DetailComponent implements OnInit {
 
   panelOpenState = false;
-
   cashIn = true;
   cashOut = false;
+  sideNav = false;
 
   mytime = new Date();
 
@@ -20,14 +20,18 @@ export class DetailComponent implements OnInit {
     console.log('DetailComponent INIT');
   }
 
-  toggleCashIn(){
+  toggleCashIn(): void{
     this.cashIn = true;
     this.cashOut = false;
   }
 
-  toggleCashOut(){
+  toggleCashOut(): void{
     this.cashIn = false;
     this.cashOut = true;
+  }
+
+  toggleRightNav(): void{
+    this.sideNav = !this.sideNav;
   }
 
 }

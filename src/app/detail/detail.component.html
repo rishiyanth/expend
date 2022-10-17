@@ -1,10 +1,10 @@
 <div>
 
   <mat-sidenav-container class="example-container">
-    <mat-sidenav mode="side" opened position="end" #rightnav class="rightnavcontent">
+    <mat-sidenav mode="side" [opened]="sideNav" position="end" #rightNav class="rightnavcontent">
       
       <div class="sidenav-header">
-        <mat-icon aria-hidden="false" aria-label="close" fontIcon="close" (click)="rightnav.toggle()"></mat-icon>
+        <mat-icon aria-hidden="false" aria-label="close" fontIcon="close" (click)="toggleRightNav()"></mat-icon>
         <p *ngIf="cashIn">Cash In</p>
         <p *ngIf="cashOut">Cash Out</p>
       </div>
@@ -14,13 +14,13 @@
       <!-- Cash In Section -->
 
       <div *ngIf="cashIn">
-          <app-cashform></app-cashform>
+          <app-cashform (toggleRightNav)="toggleRightNav()"></app-cashform>
       </div>
 
       <!-- Cash Out Section -->
       
       <div *ngIf="cashOut">
-        <app-cashform></app-cashform>
+        <app-cashform (toggleRightNav)="toggleRightNav()"></app-cashform>
       </div>
       
     </mat-sidenav>
@@ -30,8 +30,8 @@
     <mat-sidenav-content>
 
       <mat-card>
-        <button mat-raised-button color="primary" (click)="toggleCashIn()" (click)="rightnav.toggle()">Cash In</button>
-        <button mat-raised-button color="warn" (click)="toggleCashOut()" (click)="rightnav.toggle()">Cash Out</button>
+        <button mat-raised-button color="primary" (click)="toggleCashIn()" (click)="toggleRightNav()">Cash In</button>
+        <button mat-raised-button color="accent" (click)="toggleCashOut()" (click)="toggleRightNav()">Cash Out</button>
       </mat-card>
     
       <mat-accordion>

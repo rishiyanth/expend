@@ -1,4 +1,4 @@
-import {app, BrowserWindow, screen} from 'electron';
+import {app, BrowserWindow, Notification, screen, Tray, nativeImage, Menu} from 'electron';
 import * as path from 'path';
 import * as fs from 'fs';
 
@@ -12,6 +12,7 @@ function createWindow(): BrowserWindow {
 
   // Create the browser window.
   win = new BrowserWindow({
+
     x: 0,
     y: 0,
     width: size.width,
@@ -21,6 +22,14 @@ function createWindow(): BrowserWindow {
       allowRunningInsecureContent: (serve),
       contextIsolation: false,  // false if you want to run e2e test with Spectron
     },
+    icon: __dirname + './assets/logo.png',
+    titleBarStyle: 'hidden',
+    titleBarOverlay: {
+      color: '#2f3241',
+      symbolColor: '#74b1be',
+      height: 30
+    },
+    transparent: true
   });
 
   if (serve) {
@@ -53,12 +62,43 @@ function createWindow(): BrowserWindow {
   return win;
 }
 
+// FUNCTION
+
+const NOTIFICATION_TITLE = 'Xpend'
+const NOTIFICATION_BODY = 'Time to Track !'
+
+function showNotification () {
+  new Notification({
+    title: NOTIFICATION_TITLE,
+    body: NOTIFICATION_BODY
+  }).show()
+}
+
+// TRAY
+
+function createTray(){
+  let tray;
+  tray = new Tray(__dirname + './assets/logo.png')
+  const contextMenu = Menu.buildFromTemplate([
+    { label: 'Cash In', type: 'normal' },
+    { label: 'line', type: 'separator' },
+    { label: 'Cash Out', type:'normal' },
+  ])
+  
+  tray.setToolTip('Xpend')
+  tray.setContextMenu(contextMenu)
+}
+
 try {
   // This method will be called when Electron has finished
   // initialization and is ready to create browser windows.
   // Some APIs can only be used after this event occurs.
   // Added 400 ms to fix the black background issue while using transparent window. More detais at https://github.com/electron/electron/issues/15947
-  app.on('ready', () => setTimeout(createWindow, 400));
+  app.on('ready', () => {
+    setTimeout(createWindow, 400);
+    showNotification();
+    createTray();
+  });
 
   // Quit when all windows are closed.
   app.on('window-all-closed', () => {

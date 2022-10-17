@@ -18,6 +18,7 @@ import { TimepickerModule } from 'ngx-bootstrap/timepicker';
 import {MatIconModule} from '@angular/material/icon';
 import {MatDividerModule} from '@angular/material/divider';
 import { CashformComponent } from './cashform/cashform/cashform.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -37,7 +38,8 @@ import { CashformComponent } from './cashform/cashform/cashform.component';
       MatNativeDateModule,
       TimepickerModule,
       MatIconModule,
-      MatDividerModule
+      MatDividerModule,
+      ReactiveFormsModule
   ]
 })
 export class DetailModule {}
