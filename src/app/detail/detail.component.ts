@@ -11,7 +11,7 @@ const ELEMENT_DATA: IEntry[] = [
     amount: 1892,
     date: new Date(),
     category: 'Food',
-    paymentmode: 'Cash',
+    paymentMode: 'Cash',
     description: 'A',
   },
   {
@@ -19,7 +19,7 @@ const ELEMENT_DATA: IEntry[] = [
     amount: 610,
     date: new Date(),
     category: 'Meet',
-    paymentmode: 'Online',
+    paymentMode: 'Online',
     description: 'B',
   },
   {
@@ -27,7 +27,7 @@ const ELEMENT_DATA: IEntry[] = [
     amount: 2909,
     date: new Date(),
     category: 'Transport',
-    paymentmode: 'Cash',
+    paymentMode: 'Cash',
     description: 'C',
   },
   {
@@ -35,7 +35,7 @@ const ELEMENT_DATA: IEntry[] = [
     amount: 1892,
     date: new Date(),
     category: 'Food',
-    paymentmode: 'Cash',
+    paymentMode: 'Cash',
     description: 'A',
   },
   {
@@ -43,7 +43,7 @@ const ELEMENT_DATA: IEntry[] = [
     amount: 610,
     date: new Date(),
     category: 'Meet',
-    paymentmode: 'Online',
+    paymentMode: 'Online',
     description: 'B',
   },
   {
@@ -51,7 +51,7 @@ const ELEMENT_DATA: IEntry[] = [
     amount: 2909,
     date: new Date(),
     category: 'Transport',
-    paymentmode: 'Cash',
+    paymentMode: 'Cash',
     description: 'C',
   },
   {
@@ -59,7 +59,7 @@ const ELEMENT_DATA: IEntry[] = [
     amount: 1892,
     date: new Date(),
     category: 'Food',
-    paymentmode: 'Cash',
+    paymentMode: 'Cash',
     description: 'A',
   },
   {
@@ -67,7 +67,7 @@ const ELEMENT_DATA: IEntry[] = [
     amount: 2909,
     date: new Date(),
     category: 'Transport',
-    paymentmode: 'Cash',
+    paymentMode: 'Cash',
     description: 'C',
   },
   {
@@ -75,7 +75,7 @@ const ELEMENT_DATA: IEntry[] = [
     amount: 1892,
     date: new Date(),
     category: 'Food',
-    paymentmode: 'Cash',
+    paymentMode: 'Cash',
     description: 'A',
   },
   {
@@ -83,7 +83,7 @@ const ELEMENT_DATA: IEntry[] = [
     amount: 610,
     date: new Date(),
     category: 'Meet',
-    paymentmode: 'Online',
+    paymentMode: 'Online',
     description: 'B',
   },
   {
@@ -91,7 +91,7 @@ const ELEMENT_DATA: IEntry[] = [
     amount: 2909,
     date: new Date(),
     category: 'Transport',
-    paymentmode: 'Cash',
+    paymentMode: 'Cash',
     description: 'C',
   },
   {
@@ -99,7 +99,7 @@ const ELEMENT_DATA: IEntry[] = [
     amount: 1892,
     date: new Date(),
     category: 'Food',
-    paymentmode: 'Cash',
+    paymentMode: 'Cash',
     description: 'A',
   },
 ];
@@ -121,7 +121,7 @@ export class DetailComponent implements OnInit, AfterViewInit {
   // cashIn = true;
   // cashOut = false;
 
-  displayedColumns: string[] = ['date', 'description', 'category', 'paymentmode', 'amount'];
+  displayedColumns: string[] = ['date', 'description', 'category', 'paymentMode', 'amount'];
   // Add balance later
   dataSource = new MatTableDataSource<IEntry>(ELEMENT_DATA);
 

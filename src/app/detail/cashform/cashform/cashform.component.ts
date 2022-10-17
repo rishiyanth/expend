@@ -1,7 +1,9 @@
 import { Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
-import { FormBuilder, Validators,FormGroup } from '@angular/forms';
+import { FormBuilder, Validators,FormGroup, FormControl } from '@angular/forms';
 import { IEntry } from '../../../interfaces/entry';
 import { HttpClient } from '@angular/common/http';
+import { __values } from 'tslib';
+import { updateDecorator } from 'typescript/lib/tsserverlibrary';
 @Component({
   selector: 'app-cashform',
   templateUrl: './cashform.component.html',
@@ -11,15 +13,16 @@ export class CashformComponent implements OnInit {
 
   @Output() closeRightNav: EventEmitter<any> = new EventEmitter();
   cashForm: FormGroup;
-  iEntries: IEntry[] = []
+  iEntries: IEntry[]= [] 
+  options: string[] = ["Food","Transport","Stationery","Meetups"]
 
-  constructor(private fb: FormBuilder, private http: HttpClient) { }
+  constructor(private http: HttpClient,private fb: FormBuilder) { }
 
   ngOnInit(): void {
     this.cashForm = this.fb.group({
       type: ['',Validators.required],
       amount: ['',Validators.required],
-      date: ['',Validators.required],
+      date: [new Date(),Validators.required],
       category: ['',Validators.required],
       paymentMode: ['',Validators.required],
       description: [''],
@@ -27,14 +30,17 @@ export class CashformComponent implements OnInit {
   }
 
   onSubmit(): void {
-    console.log('Submitted');
+    // console.log('Submitted');
+    let updatedDate = this.cashForm.value.date
+    this.cashForm.value.date = updatedDate.getFullYear()+"-"+ (updatedDate.getMonth()+1)+ "-"+ updatedDate.getDate()
+    // console.log(JSON.stringify(this.cashForm.value))
+    this.http.post('http://192.168.68.95:8000/addTransaction/',this.cashForm.value).subscribe((data)=>{
+      console.log("This works")
+    })
     this.iEntries.push(this.cashForm.value);
     this.cashForm.reset();
-    console.log(this.iEntries)
+    // console.log(this.cashForm.value)
     // Reset validators
-    // this.http.post("",this.iEntries).subscribe(()=>{
-    //   console.log("Data sent successfully");
-    // })
     this.closeRightNav.emit();
   }
 

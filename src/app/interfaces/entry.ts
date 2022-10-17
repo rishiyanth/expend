@@ -1,8 +1,8 @@
 export interface IEntry {
-    type: string;
+    category: string;
     amount: number;
     date: Date;
-    category: string;
-    paymentmode: string;
     description: string;
+    type: string;
+    paymentMode: string;
 };
