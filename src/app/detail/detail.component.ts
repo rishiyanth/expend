@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-
 @Component({
   selector: 'app-detail',
   templateUrl: './detail.component.html',
@@ -18,17 +17,18 @@ export class DetailComponent implements OnInit {
 
   ngOnInit(): void {
     console.log('DetailComponent INIT');
+    this
   }
 
-  toggleCashIn(): void{
-    this.cashIn = true;
-    this.cashOut = false;
-  }
+  // toggleCashIn(): void{
+  //   this.cashIn = true;
+  //   this.cashOut = false;
+  // }
 
-  toggleCashOut(): void{
-    this.cashIn = false;
-    this.cashOut = true;
-  }
+  // toggleCashOut(): void{
+  //   this.cashIn = false;
+  //   this.cashOut = true;
+  // }s
 
   toggleRightNav(): void{
     this.sideNav = !this.sideNav;
