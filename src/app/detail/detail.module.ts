@@ -20,7 +20,9 @@ import {MatDividerModule} from '@angular/material/divider';
 import { CashformComponent } from './cashform/cashform/cashform.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
-
+import {MatTableModule} from '@angular/material/table';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatSortModule} from '@angular/material/sort';
 
 @NgModule({
   declarations: [DetailComponent, CashformComponent],
@@ -41,7 +43,10 @@ import {MatButtonToggleModule} from '@angular/material/button-toggle';
       MatIconModule,
       MatDividerModule,
       ReactiveFormsModule,
-      MatButtonToggleModule
+      MatButtonToggleModule,
+      MatTableModule,
+      MatPaginatorModule,
+      MatSortModule
   ]
 })
 export class DetailModule {}

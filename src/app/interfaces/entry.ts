@@ -5,4 +5,4 @@ export interface IEntry {
     category: string;
     paymentmode: string;
     description: string;
-}
+};
