@@ -1,4 +1,5 @@
 export interface IEntry {
+    id: number;
     category: string;
     amount: number;
     date: Date;
@@ -6,3 +7,4 @@ export interface IEntry {
     type: string;
     paymentMode: string;
 };
+

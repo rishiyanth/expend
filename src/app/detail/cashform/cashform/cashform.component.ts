@@ -3,7 +3,7 @@ import { FormBuilder, Validators,FormGroup, FormControl } from '@angular/forms';
 import { IEntry } from '../../../interfaces/entry';
 import { HttpClient } from '@angular/common/http';
 import { __values } from 'tslib';
-import { updateDecorator } from 'typescript/lib/tsserverlibrary';
+import { paymentOptions } from '../../../../variables/globalvariables';
 @Component({
   selector: 'app-cashform',
   templateUrl: './cashform.component.html',
@@ -14,7 +14,7 @@ export class CashformComponent implements OnInit {
   @Output() closeRightNav: EventEmitter<any> = new EventEmitter();
   cashForm: FormGroup;
   iEntries: IEntry[]= [] 
-  options: string[] = ["Food","Transport","Stationery","Meetups"]
+  options = paymentOptions
 
   constructor(private http: HttpClient,private fb: FormBuilder) { }
 

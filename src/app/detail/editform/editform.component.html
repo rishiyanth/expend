@@ -1,0 +1,63 @@
+
+<form class="form" [formGroup]="editForm" (ngSubmit)="onSubmit()">
+
+    <div class="form-group">
+        <mat-button-toggle-group name="fontStyle" aria-label="Font Style" [ngModel]="data.type" formControlName="type">
+            <mat-button-toggle value="Cash In">+ Cash In</mat-button-toggle>
+            <mat-button-toggle value="Cash Out">- Cash Out</mat-button-toggle>
+        </mat-button-toggle-group>
+        <!-- CREAT VALIDATORS HTML -->
+    </div>
+    <br>
+
+    <div class="form-group">
+        <mat-form-field appearance="fill" floatLabel="always" color="accent">
+            <mat-label>Amount</mat-label>
+            <input matInput type="number" class="example-right-align" [ngModel]="data.amount" formControlName="amount" autocomplete="off">
+            <span matPrefix>&#8377;</span>
+            <span matSuffix>.00</span>
+        </mat-form-field>
+    
+        <!-- <timepicker [(ngModel)]="mytime"></timepicker> -->
+    </div>
+    
+    <div class="form-group">
+        <mat-form-field color="accent" appearance="fill">
+            <mat-label>MM/DD/YYYY</mat-label>
+            <input matInput [matDatepicker]="picker1" [ngModel]="data.date" formControlName="date">
+            <mat-datepicker-toggle matSuffix [for]="picker1" ></mat-datepicker-toggle>
+            <mat-datepicker #picker1></mat-datepicker>
+        </mat-form-field>
+    </div>
+    
+    <div class="form-group">
+        <mat-form-field appearance="fill" color="accent">
+            <mat-select required [ngModel]="data.category" formControlName="category">
+                <mat-option>-- None --</mat-option>
+                <mat-option *ngFor="let option of options" [value]="option">{{option}}</mat-option>
+            </mat-select>
+            <mat-label>Category</mat-label>
+        </mat-form-field>
+    </div>
+    
+    <div class="form-group">
+        <mat-form-field appearance="fill" color="accent" >
+            <mat-select required [ngModel]="data.paymentMode" formControlName="paymentMode">
+                <mat-option value="Cash" selected>Cash</mat-option>
+                <mat-option value="Online">Online</mat-option>
+            </mat-select>
+            <mat-label>Payment Mode</mat-label>
+        </mat-form-field>
+    </div>
+    
+    <div class="form-group">
+        <mat-form-field appearance="fill" color="accent">
+            <mat-label>Description</mat-label>
+            <textarea matInput formControlName="description" [ngModel]="data.description"></textarea>
+        </mat-form-field>
+    </div>
+    
+    <mat-divider class="divider"></mat-divider>
+    <button mat-raised-button color="primary" type="submit">Edit Entry</button>
+
+</form>

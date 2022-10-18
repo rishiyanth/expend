@@ -7,6 +7,7 @@ import { IEntry } from '../interfaces/entry';
 
 const ELEMENT_DATA: IEntry[] = [
   {
+    id:1,
     type: 'Cash In',
     amount: 1892,
     date: new Date(),
@@ -15,22 +16,16 @@ const ELEMENT_DATA: IEntry[] = [
     description: 'A',
   },
   {
+    id:2,
     type: 'Cash Out',
     amount: 610,
     date: new Date(),
-    category: 'Meet',
+    category: 'Meetups',
     paymentMode: 'Online',
     description: 'B',
   },
   {
-    type: 'Cash In',
-    amount: 2909,
-    date: new Date(),
-    category: 'Transport',
-    paymentMode: 'Cash',
-    description: 'C',
-  },
-  {
+    id:3,
     type: 'Cash In',
     amount: 1892,
     date: new Date(),
@@ -39,14 +34,16 @@ const ELEMENT_DATA: IEntry[] = [
     description: 'A',
   },
   {
+    id:4,
     type: 'Cash Out',
     amount: 610,
     date: new Date(),
-    category: 'Meet',
+    category: 'Meetups',
     paymentMode: 'Online',
     description: 'B',
   },
   {
+    id:5,
     type: 'Cash In',
     amount: 2909,
     date: new Date(),
@@ -55,6 +52,7 @@ const ELEMENT_DATA: IEntry[] = [
     description: 'C',
   },
   {
+    id:6,
     type: 'Cash In',
     amount: 1892,
     date: new Date(),
@@ -63,6 +61,7 @@ const ELEMENT_DATA: IEntry[] = [
     description: 'A',
   },
   {
+    id:7,
     type: 'Cash In',
     amount: 2909,
     date: new Date(),
@@ -71,6 +70,7 @@ const ELEMENT_DATA: IEntry[] = [
     description: 'C',
   },
   {
+    id:8,
     type: 'Cash In',
     amount: 1892,
     date: new Date(),
@@ -79,14 +79,16 @@ const ELEMENT_DATA: IEntry[] = [
     description: 'A',
   },
   {
+    id:9,
     type: 'Cash Out',
     amount: 610,
     date: new Date(),
-    category: 'Meet',
+    category: 'Meetups',
     paymentMode: 'Online',
     description: 'B',
   },
   {
+    id:10,
     type: 'Cash In',
     amount: 2909,
     date: new Date(),
@@ -95,12 +97,31 @@ const ELEMENT_DATA: IEntry[] = [
     description: 'C',
   },
   {
+    id:11,
     type: 'Cash In',
     amount: 1892,
     date: new Date(),
     category: 'Food',
     paymentMode: 'Cash',
     description: 'A',
+  },
+  {
+    id:12,
+    type: 'Cash Out',
+    amount: 11500,
+    date: new Date("Tue Nov 05 1985 06:23:20 GMT+0530 (IST)"),
+    category: 'Food',
+    paymentMode: 'Cash',
+    description: 'A',
+  },
+  {
+    id:13,
+    type: 'Cash In',
+    amount: 2909,
+    date: new Date(),
+    category: 'Transport',
+    paymentMode: 'Cash',
+    description: 'C',
   },
 ];
 
@@ -117,6 +138,8 @@ export class DetailComponent implements OnInit, AfterViewInit {
 
   panelOpenState = false;
   sideNav = false;
+  editNav=false;
+  clickedData: IEntry
 
   // cashIn = true;
   // cashOut = false;
@@ -148,6 +171,24 @@ export class DetailComponent implements OnInit, AfterViewInit {
 
   toggleRightNav(): void{
     this.sideNav = !this.sideNav;
+  }
+
+  toggleEditNav():void{
+    this.editNav= !this.editNav;
+  }
+
+  passData(content: any):void{
+    this.editNav= !this.editNav;
+    this.clickedData = content
+    // console.log(this.clickedData)
+  }
+
+  updateData(content: any){
+    //TO CHANGE THE IENTRY DATA THAT WAS EDITED BY THE USER
+    //THIS ALSO REFLECTS IN THE DB
+    this.editNav= !this.editNav;
+    console.log("Inside detail component")
+    console.log(content)
   }
 
   announceSortChange(sortState: Sort) {

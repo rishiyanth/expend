@@ -30,3 +30,8 @@ table {
 th.mat-sort-header-sorted {
     color: black;
 }
+
+.mat-row:hover .mat-cell {
+    border-color: currentColor;
+    cursor: pointer;
+}
