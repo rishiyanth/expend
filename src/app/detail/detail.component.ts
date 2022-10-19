@@ -4,13 +4,12 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort, Sort} from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { IEntry } from '../interfaces/entry';
-import { totalBalance,totalCashIn, totalCashOut } from '../../variables/globalvariables';
 
 const ELEMENT_DATA: IEntry[] = [
   {
     id:1,
     type: 'Cash In',
-    amount: 1892,
+    amount: 100,
     date: new Date(),
     category: 'Food',
     paymentMode: 'Cash',
@@ -19,7 +18,7 @@ const ELEMENT_DATA: IEntry[] = [
   {
     id:2,
     type: 'Cash Out',
-    amount: 610,
+    amount: 200,
     date: new Date(),
     category: 'Meetups',
     paymentMode: 'Online',
@@ -28,7 +27,7 @@ const ELEMENT_DATA: IEntry[] = [
   {
     id:3,
     type: 'Cash In',
-    amount: 1892,
+    amount: 300,
     date: new Date(),
     category: 'Food',
     paymentMode: 'Cash',
@@ -37,7 +36,7 @@ const ELEMENT_DATA: IEntry[] = [
   {
     id:4,
     type: 'Cash Out',
-    amount: 610,
+    amount: 400,
     date: new Date(),
     category: 'Meetups',
     paymentMode: 'Online',
@@ -46,7 +45,7 @@ const ELEMENT_DATA: IEntry[] = [
   {
     id:5,
     type: 'Cash In',
-    amount: 2909,
+    amount: 500,
     date: new Date(),
     category: 'Transport',
     paymentMode: 'Cash',
@@ -55,7 +54,7 @@ const ELEMENT_DATA: IEntry[] = [
   {
     id:6,
     type: 'Cash In',
-    amount: 1892,
+    amount: 600,
     date: new Date(),
     category: 'Food',
     paymentMode: 'Cash',
@@ -64,7 +63,7 @@ const ELEMENT_DATA: IEntry[] = [
   {
     id:7,
     type: 'Cash In',
-    amount: 2909,
+    amount: 700,
     date: new Date(),
     category: 'Transport',
     paymentMode: 'Cash',
@@ -73,7 +72,7 @@ const ELEMENT_DATA: IEntry[] = [
   {
     id:8,
     type: 'Cash In',
-    amount: 1892,
+    amount: 800,
     date: new Date(),
     category: 'Food',
     paymentMode: 'Cash',
@@ -82,7 +81,7 @@ const ELEMENT_DATA: IEntry[] = [
   {
     id:9,
     type: 'Cash Out',
-    amount: 610,
+    amount: 900,
     date: new Date(),
     category: 'Meetups',
     paymentMode: 'Online',
@@ -91,7 +90,7 @@ const ELEMENT_DATA: IEntry[] = [
   {
     id:10,
     type: 'Cash In',
-    amount: 2909,
+    amount: 1000,
     date: new Date(),
     category: 'Transport',
     paymentMode: 'Cash',
@@ -100,7 +99,7 @@ const ELEMENT_DATA: IEntry[] = [
   {
     id:11,
     type: 'Cash In',
-    amount: 1892,
+    amount: 1100,
     date: new Date(),
     category: 'Food',
     paymentMode: 'Cash',
@@ -109,7 +108,7 @@ const ELEMENT_DATA: IEntry[] = [
   {
     id:12,
     type: 'Cash Out',
-    amount: 11500,
+    amount: 1200,
     date: new Date('Tue Nov 05 1985 06:23:20 GMT+0530 (IST)'),
     category: 'Food',
     paymentMode: 'Cash',
@@ -118,7 +117,7 @@ const ELEMENT_DATA: IEntry[] = [
   {
     id:13,
     type: 'Cash In',
-    amount: 2909,
+    amount: 1300,
     date: new Date(),
     category: 'Transport',
     paymentMode: 'Cash',
@@ -141,6 +140,9 @@ export class DetailComponent implements OnInit, AfterViewInit {
   sideNav = false;
   editNav=false;
   clickedData: IEntry;
+  totalBalance: number = 0;
+  totalCashIn: number = 0;
+  totalCashOut: number = 0;
 
   // cashIn = true;
   // cashOut = false;
@@ -150,9 +152,28 @@ export class DetailComponent implements OnInit, AfterViewInit {
   dataSource = new MatTableDataSource<IEntry>(ELEMENT_DATA);
 
   constructor(private liveAnnouncer: LiveAnnouncer) {}
+  
+  calTotalCashIn(fetchedData: any){
+      for (var data of fetchedData){
+        console.log(data)
+        if(data.type == 'Cash In')
+        {
+          this.totalCashIn += data.amount
+        }
+        else(data.type == 'Cash Out')
+        {
+          this.totalCashOut += data.amount
+        }
+      }
+      this.totalBalance = this.totalCashIn - this.totalCashOut
+  }
 
   ngOnInit(): void {
     console.log('DetailComponent INIT');
+    this.calTotalCashIn(ELEMENT_DATA)
+    document.getElementById('cashin').innerHTML= this.totalCashIn.toString();
+    document.getElementById('cashout').innerHTML= this.totalCashOut.toString();
+    document.getElementById('cashbalance').innerHTML= this.totalBalance.toString();
   }
 
   ngAfterViewInit() {

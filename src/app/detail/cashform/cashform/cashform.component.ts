@@ -4,6 +4,7 @@ import { IEntry } from '../../../interfaces/entry';
 import { HttpClient } from '@angular/common/http';
 import { __values } from 'tslib';
 import { paymentOptions } from '../../../../variables/globalvariables';
+
 @Component({
   selector: 'app-cashform',
   templateUrl: './cashform.component.html',
