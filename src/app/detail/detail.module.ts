@@ -13,7 +13,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatSelectModule} from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import {MatDatepickerModule} from '@angular/material/datepicker';
-import {MatNativeDateModule} from '@angular/material/core';
+import {MatNativeDateModule, MAT_DATE_LOCALE} from '@angular/material/core';
 import { TimepickerModule } from 'ngx-bootstrap/timepicker';
 import {MatIconModule} from '@angular/material/icon';
 import {MatDividerModule} from '@angular/material/divider';
@@ -24,6 +24,8 @@ import {MatTableModule} from '@angular/material/table';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatSortModule} from '@angular/material/sort';
 import { EditformComponent } from './editform/editform.component';
+import { MomentDateModule } from '@angular/material-moment-adapter';
+import { MatTableExporterModule } from 'mat-table-exporter';
 
 
 @NgModule({
@@ -48,7 +50,9 @@ import { EditformComponent } from './editform/editform.component';
       MatButtonToggleModule,
       MatTableModule,
       MatPaginatorModule,
-      MatSortModule
-  ]
+      MatSortModule,
+      MomentDateModule,
+      MatTableExporterModule
+  ],
 })
 export class DetailModule {}

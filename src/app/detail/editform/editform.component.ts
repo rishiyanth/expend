@@ -2,18 +2,39 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { paymentOptions } from '../../../variables/globalvariables';
 
+import { MAT_DATE_FORMATS } from '@angular/material/core';
+
+import { DateAdapter, MAT_DATE_LOCALE } from '@angular/material/core';
+import { MomentDateAdapter } from '@angular/material-moment-adapter';
+
+export const MY_DATE_FORMATS = {
+  parse: {
+    dateInput: 'LL'
+},
+display: {
+    dateInput: 'YYYY-MM-DD',
+    monthYearLabel: 'YYYY',
+    dateA11yLabel: 'LL',
+    monthYearA11yLabel: 'YYYY'
+}
+};
+
 @Component({
   selector: 'app-editform',
   templateUrl: './editform.component.html',
-  styleUrls: ['./editform.component.scss']
+  styleUrls: ['./editform.component.scss'],
+  providers: [
+    { provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE] },
+    { provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMATS }
+  ]
 })
 export class EditformComponent implements OnInit {
 
   // @Output() closeRightNav: EventEmitter<any> = new EventEmitter();
   @Output() updatedData: EventEmitter<any> = new EventEmitter();
-  @Input() data !: any
+  @Input() data !: any;
   editForm: FormGroup;
-  options = paymentOptions
+  options = paymentOptions;
   constructor(private fb: FormBuilder) { }
 
   // selectedCategory = this.data.category
@@ -32,7 +53,7 @@ export class EditformComponent implements OnInit {
   }
 
   onSubmit(): void {
-    this.data = this.editForm.value
+    this.data = this.editForm.value;
     // console.log(this.data)
     this.updatedData.emit(this.data);
   }

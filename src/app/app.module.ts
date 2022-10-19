@@ -15,6 +15,7 @@ import { HomeModule } from './home/home.module';
 import { DetailModule } from './detail/detail.module';
 
 import { AppComponent } from './app.component';
+import { MAT_DATE_LOCALE } from '@angular/material/core';
 
 // AoT requires an exported function for factories
 const httpLoaderFactory = (http: HttpClient): TranslateHttpLoader =>  new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -39,7 +40,9 @@ const httpLoaderFactory = (http: HttpClient): TranslateHttpLoader =>  new Transl
       }
     })
   ],
-  providers: [],
+  // providers: [
+  //   { provide: MAT_DATE_LOCALE, useValue: 'en-GB' }
+  // ],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

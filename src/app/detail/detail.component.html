@@ -1,8 +1,10 @@
 <div>
 
   <mat-sidenav-container class="example-container">
+
+    <!-- CASH FORM -->
+
     <mat-sidenav mode="over" [opened]="sideNav" position="end" #rightNav class="rightnavcontent" *ngIf="sideNav">
-      
       <div class="sidenav-header">
         <mat-icon aria-hidden="false" aria-label="close" fontIcon="close" (click)="toggleRightNav()"></mat-icon>
         <p>Add entry</p>
@@ -16,6 +18,8 @@
         </div>
       </div>  
     </mat-sidenav>
+
+    <!-- EDIT FORM -->
 
     <mat-sidenav mode="over" [opened]="editNav" position="end" #rightNav class="rightnavcontent" *ngIf="editNav">
       
@@ -39,9 +43,9 @@
 
       <!--FORM-->
 
-      <mat-card>
+      <!-- <mat-card>
         <button mat-raised-button color="primary" (click)="toggleRightNav()">Add entry</button>
-      </mat-card>
+      </mat-card> -->
     
       <!-- <mat-accordion>
         <mat-expansion-panel hideToggle>
@@ -80,15 +84,50 @@
           Total Balance:
           <p id='cashbalance'></p>
       </mat-card>
+      <!-- <mat-card let element="totalCashIn">
+          Total Cash In: {{}}
+      </mat-card> -->
     
+      <mat-card>
+        <button mat-raised-button color="primary" (click)="toggleRightNav()">Add entry</button>
+
+        <mat-button-toggle-group name="typeFilter" aria-label="typeFilter" (change)="filterTable($event.value)">
+          <mat-button-toggle value="cash in" #cashInToggle>Cash In</mat-button-toggle>
+          <mat-button-toggle value="cash out" #cashOutToggle>Cash Out</mat-button-toggle>
+        </mat-button-toggle-group>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Category</mat-label>
+          <mat-select (selectionChange)="filterTable($event.value)">
+            <mat-option *ngFor="let category of categories" value={{category}} >{{category}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Mode of Payment</mat-label>
+          <mat-select (selectionChange)="filterTable($event.value)">
+            <mat-option value='cash' >Cash</mat-option>
+            <mat-option value='online' >Online</mat-option>
+
+          </mat-select>
+        </mat-form-field>
+
+        <button mat-raised-button color="primary" (click)="resetFilter()">Reset</button>
+
+        <button mat-raised-button color="primary" (click)="exporter.exportTable('xlsx')">To Pdf</button>
+        <button mat-raised-button color="primary" (click)="exporter.exportTable('xlsx')">To Excel</button>
+
+
+      </mat-card>
+
       <!-- TABLE -->
 
-      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort (matSortChange)="announceSortChange($event)">
+      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort (matSortChange)="announceSortChange($event)" matTableExporter #exporter="matTableExporter">
 
         <!-- Date Column -->
         <ng-container matColumnDef="date">
           <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by date"> Date </th>
-          <td mat-cell *matCellDef="let element"> {{element.date}} </td>
+          <td mat-cell *matCellDef="let element"> {{element.date | date:'dd/MM/yyyy'}} </td>
         </ng-container>
       
         <!-- Description Column -->
@@ -114,6 +153,12 @@
           <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by amount"> Amount </th>
           <td mat-cell *matCellDef="let element"> {{element.amount}} </td>
         </ng-container>     
+
+        <!-- Type Column -->
+        <ng-container matColumnDef="type">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by type"> Type </th>
+          <td mat-cell *matCellDef="let element"> {{element.type}} </td>
+        </ng-container>  
       
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row  *matRowDef="let row; columns: displayedColumns;" (click)="passData(row)"></tr>

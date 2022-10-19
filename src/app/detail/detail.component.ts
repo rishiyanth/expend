@@ -1,9 +1,12 @@
 import { LiveAnnouncer } from '@angular/cdk/a11y';
-import { Component, OnInit, ViewChild, AfterViewInit,EventEmitter} from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit,EventEmitter, ElementRef} from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort, Sort} from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { IEntry } from '../interfaces/entry';
+import { totalBalance,totalCashIn, totalCashOut } from '../../variables/globalvariables';
+import { MatButtonToggle } from '@angular/material/button-toggle';
+import { paymentOptions } from '../../variables/globalvariables';
 
 const ELEMENT_DATA: IEntry[] = [
   {
@@ -135,42 +138,45 @@ export class DetailComponent implements OnInit, AfterViewInit {
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
+  @ViewChild('cashInToggle') cashInToggle: MatButtonToggle;
+  @ViewChild('cashOutToggle') cashOutToggle: MatButtonToggle;
+
 
   panelOpenState = false;
   sideNav = false;
   editNav=false;
   clickedData: IEntry;
-  totalBalance: number = 0;
-  totalCashIn: number = 0;
-  totalCashOut: number = 0;
+  totalBalance = 0;
+  totalCashIn = 0;
+  totalCashOut = 0;
+  filterValue = '';
+  toggleButtonReset = false;
 
-  // cashIn = true;
-  // cashOut = false;
-
-  displayedColumns: string[] = ['date', 'description', 'category', 'paymentMode', 'amount'];
+  displayedColumns: string[] = ['date', 'description', 'category', 'paymentMode', 'amount','type'];
   // Add balance later
   dataSource = new MatTableDataSource<IEntry>(ELEMENT_DATA);
+  categories: string[] = paymentOptions;
 
   constructor(private liveAnnouncer: LiveAnnouncer) {}
-  
+
   calTotalCashIn(fetchedData: any){
-      for (var data of fetchedData){
-        console.log(data)
-        if(data.type == 'Cash In')
+      for (const data of fetchedData){
+        console.log(data);
+        if(data.type === 'Cash In')
         {
-          this.totalCashIn += data.amount
+          this.totalCashIn += data.amount;
         }
-        else(data.type == 'Cash Out')
+        else{(data.type == 'Cash Out')};
         {
-          this.totalCashOut += data.amount
+          this.totalCashOut += data.amount;
         }
       }
-      this.totalBalance = this.totalCashIn - this.totalCashOut
+      this.totalBalance = this.totalCashIn - this.totalCashOut;
   }
 
   ngOnInit(): void {
     console.log('DetailComponent INIT');
-    this.calTotalCashIn(ELEMENT_DATA)
+    this.calTotalCashIn(ELEMENT_DATA);
     document.getElementById('cashin').innerHTML= this.totalCashIn.toString();
     document.getElementById('cashout').innerHTML= this.totalCashOut.toString();
     document.getElementById('cashbalance').innerHTML= this.totalBalance.toString();
@@ -180,16 +186,6 @@ export class DetailComponent implements OnInit, AfterViewInit {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }
-
-  // toggleCashIn(): void{
-  //   this.cashIn = true;
-  //   this.cashOut = false;
-  // }
-
-  // toggleCashOut(): void{
-  //   this.cashIn = false;
-  //   this.cashOut = true;
-  // }s
 
   toggleRightNav(): void{
     this.sideNav = !this.sideNav;
@@ -221,4 +217,29 @@ export class DetailComponent implements OnInit, AfterViewInit {
     }
   }
 
+  filterTable(value): void{
+    this.filterValue = value;
+    this.dataSource.filter = this.filterValue.trim().toLowerCase();
+  }
+
+  resetFilter(): void{
+    this.filterValue = '';
+    this.dataSource.filter = this.filterValue.trim().toLowerCase();
+    this.cashInToggle.checked = false;
+    this.cashOutToggle.checked = false;
+  }
+
 }
+
+  // cashIn = true;
+  // cashOut = false;
+
+  // toggleCashIn(): void{
+  //   this.cashIn = true;
+  //   this.cashOut = false;
+  // }
+
+  // toggleCashOut(): void{
+  //   this.cashIn = false;
+  //   this.cashOut = true;
+  // }
