@@ -25,6 +25,7 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatSortModule} from '@angular/material/sort';
 import { EditformComponent } from './editform/editform.component';
 
+
 @NgModule({
   declarations: [DetailComponent, CashformComponent, EditformComponent],
   imports: [

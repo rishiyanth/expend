@@ -4,6 +4,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort, Sort} from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { IEntry } from '../interfaces/entry';
+import { totalBalance,totalCashIn, totalCashOut } from '../../variables/globalvariables';
 
 const ELEMENT_DATA: IEntry[] = [
   {
@@ -109,7 +110,7 @@ const ELEMENT_DATA: IEntry[] = [
     id:12,
     type: 'Cash Out',
     amount: 11500,
-    date: new Date("Tue Nov 05 1985 06:23:20 GMT+0530 (IST)"),
+    date: new Date('Tue Nov 05 1985 06:23:20 GMT+0530 (IST)'),
     category: 'Food',
     paymentMode: 'Cash',
     description: 'A',
@@ -139,7 +140,7 @@ export class DetailComponent implements OnInit, AfterViewInit {
   panelOpenState = false;
   sideNav = false;
   editNav=false;
-  clickedData: IEntry
+  clickedData: IEntry;
 
   // cashIn = true;
   // cashOut = false;
@@ -173,13 +174,13 @@ export class DetailComponent implements OnInit, AfterViewInit {
     this.sideNav = !this.sideNav;
   }
 
-  toggleEditNav():void{
+  toggleEditNav(): void{
     this.editNav= !this.editNav;
   }
 
-  passData(content: any):void{
+  passData(content: any): void{
     this.editNav= !this.editNav;
-    this.clickedData = content
+    this.clickedData = content;
     // console.log(this.clickedData)
   }
 
@@ -187,8 +188,8 @@ export class DetailComponent implements OnInit, AfterViewInit {
     //TO CHANGE THE IENTRY DATA THAT WAS EDITED BY THE USER
     //THIS ALSO REFLECTS IN THE DB
     this.editNav= !this.editNav;
-    console.log("Inside detail component")
-    console.log(content)
+    console.log('Inside detail component');
+    console.log(content);
   }
 
   announceSortChange(sortState: Sort) {
