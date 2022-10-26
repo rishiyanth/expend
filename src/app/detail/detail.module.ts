@@ -26,6 +26,7 @@ import {MatSortModule} from '@angular/material/sort';
 import { EditformComponent } from './editform/editform.component';
 import { MomentDateModule } from '@angular/material-moment-adapter';
 import { MatTableExporterModule } from 'mat-table-exporter';
+import { NgChartsModule } from 'ng2-charts';
 
 
 @NgModule({
@@ -52,7 +53,8 @@ import { MatTableExporterModule } from 'mat-table-exporter';
       MatPaginatorModule,
       MatSortModule,
       MomentDateModule,
-      MatTableExporterModule
+      MatTableExporterModule,
+      NgChartsModule
   ],
 })
 export class DetailModule {}

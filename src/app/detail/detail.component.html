@@ -72,15 +72,15 @@
           <p>I'm visible because I am open</p>
         </mat-expansion-panel>
       </mat-accordion> -->
-      <mat-card let element="totalCashIn">
+      <mat-card class="example-card">
             Total Cash In:
             <p id='cashin'></p>
       </mat-card>
-      <mat-card>
+      <mat-card class="example-card">
           Total Cash Out: 
           <p id='cashout'></p>
       </mat-card>
-      <mat-card>
+      <mat-card class="example-card">
           Total Balance:
           <p id='cashbalance'></p>
       </mat-card>
@@ -98,17 +98,18 @@
 
         <mat-form-field appearance="outline">
           <mat-label>Category</mat-label>
-          <mat-select (selectionChange)="filterTable($event.value)">
+          <mat-select (selectionChange)="filterTable($event.value)" [(ngModel)]="category">
+            <mat-option value=''>Choose</mat-option>
             <mat-option *ngFor="let category of categories" value={{category}} >{{category}}</mat-option>
           </mat-select>
         </mat-form-field>
 
         <mat-form-field appearance="outline">
           <mat-label>Mode of Payment</mat-label>
-          <mat-select (selectionChange)="filterTable($event.value)">
-            <mat-option value='cash' >Cash</mat-option>
-            <mat-option value='online' >Online</mat-option>
-
+          <mat-select (selectionChange)="filterTable($event.value)" [(ngModel)]="payment">
+            <mat-option value=''>Choose</mat-option>
+            <mat-option value='Cash' >Cash</mat-option>
+            <mat-option value='Online' >Online</mat-option>
           </mat-select>
         </mat-form-field>
 
@@ -168,6 +169,52 @@
       showFirstLastButtons 
       aria-label="Select page of entries">
       </mat-paginator>
+      <br>
+
+      <mat-card>
+        <div>
+          <mat-label>STATS</mat-label>
+        </div>
+        <!--<mat-select (selectionChange)="filterTable($event.value)" [(ngModel)]="payment">
+          <mat-option value=''>Choose</mat-option>
+          <mat-option value='pie' >Pie chart</mat-option>
+          <mat-option value='online' ></mat-option>
+        </mat-select> -->
+        <div class="example-canvas"> 
+          <canvas baseChart
+            [type]="'pie'"
+            [datasets]="chartDataCategory"
+            [labels]="chartLabelCategory"
+            [options]="pieChartOptions"
+            [plugins]="chartPlugins"
+            [legend]="chartLegend">
+          </canvas>
+        </div>
+        
+        <div class="example-canvas">
+          <canvas baseChart
+            [type]="'pie'"
+            [datasets]="chartDataType"
+            [labels]="chartLabelType"
+            [options]="pieChartOptions"
+            [plugins]="chartPlugins"
+            [legend]="chartLegend"
+            class="example-canvas">
+          </canvas>
+        </div>   
+
+        <div class="example-canvas"> 
+          <canvas baseChart
+            [data]="barChartData"
+            [options]="barChartOptions"
+            [plugins]="chartPlugins"
+            [legend]="chartLegend"
+            [type]="'bar'"
+            class="example-canvas">
+          </canvas>
+        </div>
+
+      </mat-card>
 
     </mat-sidenav-content>
   </mat-sidenav-container>

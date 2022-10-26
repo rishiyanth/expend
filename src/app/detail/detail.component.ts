@@ -4,9 +4,9 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort, Sort} from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { IEntry } from '../interfaces/entry';
-import { totalBalance,totalCashIn, totalCashOut } from '../../variables/globalvariables';
 import { MatButtonToggle } from '@angular/material/button-toggle';
-import { paymentOptions } from '../../variables/globalvariables';
+import { paymentOptions,paymentType,paymentMode} from '../../variables/globalvariables';
+import { ChartConfiguration, ChartOptions } from 'chart.js';
 
 const ELEMENT_DATA: IEntry[] = [
   {
@@ -126,6 +126,24 @@ const ELEMENT_DATA: IEntry[] = [
     paymentMode: 'Cash',
     description: 'C',
   },
+  {
+    id:14,
+    type: 'Cash In',
+    amount: 7000,
+    date: new Date(),
+    category: 'Stationery',
+    paymentMode: 'Online',
+    description: 'C',
+  },
+  {
+    id:14,
+    type: 'Cash Out',
+    amount: 1000,
+    date: new Date(),
+    category: 'Stationery',
+    paymentMode: 'Cash',
+    description: 'F',
+  }
 ];
 
 @Component({
@@ -150,6 +168,11 @@ export class DetailComponent implements OnInit, AfterViewInit {
   totalCashIn = 0;
   totalCashOut = 0;
   filterValue = '';
+  category = '';
+  payment = '';
+  dataCategories = new Array(paymentOptions.length).fill(0);
+  dataType = new Array(paymentType.length).fill(0);
+  dataMode = new Array(paymentMode.length).fill(0);
   toggleButtonReset = false;
 
   displayedColumns: string[] = ['date', 'description', 'category', 'paymentMode', 'amount','type'];
@@ -157,21 +180,95 @@ export class DetailComponent implements OnInit, AfterViewInit {
   dataSource = new MatTableDataSource<IEntry>(ELEMENT_DATA);
   categories: string[] = paymentOptions;
 
+  //FOR PIE CHART BASED ON CATEGORY
+
+  public pieChartOptions: ChartOptions<'pie'> = {
+    responsive: false,
+  };
+  public chartLabelCategory = paymentOptions;
+  public chartDataCategory = [ {
+    data: this.evalChartCategories(ELEMENT_DATA)
+  } ];
+  public chartLegend = true;
+  public chartPlugins = [];
+
+  //FOR BAR CHART
+
+  public barChartOptions: ChartConfiguration<'bar'>['options'] = {
+    responsive: false,
+  };
+
+  public barChartData: ChartConfiguration<'bar'>['data'] = {
+    labels: paymentMode,
+    datasets: [{data: this.evalChartMode(ELEMENT_DATA),label: 'Total expenses'}]
+  };
+
+  //FOR PIE CHART BASED ON TYPE
+
+  public chartLabelType = paymentType;
+  public chartDataType = [ {
+    data: this.evalChartType(ELEMENT_DATA)
+  } ];
+  
+
   constructor(private liveAnnouncer: LiveAnnouncer) {}
 
   calTotalCashIn(fetchedData: any){
       for (const data of fetchedData){
-        console.log(data);
-        if(data.type === 'Cash In')
-        {
-          this.totalCashIn += data.amount;
-        }
-        else{(data.type == 'Cash Out')};
+        // console.log(data);
+        if(data.type == 'Cash Out')
         {
           this.totalCashOut += data.amount;
         }
+        if(data.type == 'Cash In')
+        { 
+          this.totalCashIn += data.amount;
+        }
+        // console.log(this.totalCashIn+" "+this.totalCashOut)
       }
       this.totalBalance = this.totalCashIn - this.totalCashOut;
+  }
+
+  evalChartCategories(fetchedData: any){
+    for(const data of fetchedData){
+      for(const index in paymentOptions){
+        // console.log(index+":"+paymentOptions[index])
+        if(data.category == paymentOptions[index]){
+          this.dataCategories[index]++;
+          // console.log("OK!"+this.dataValues[index])
+        }
+      }
+    }
+    // console.log("THis is a block:"+this.dataValues);
+    return this.dataCategories
+  }
+
+  evalChartType(fetchedData:any){
+    for(const data of fetchedData){
+      for(const index in paymentOptions){
+        // console.log(index+":"+paymentOptions[index])
+        if(data.type == paymentType[index]){
+          this.dataType[index]++;
+          console.log("OK!"+this.dataType[index])
+        }
+      }
+    }
+    // console.log("THis is a block:"+this.dataValues);
+    return this.dataType
+  }
+
+  evalChartMode(fetchedData:any){
+    for(const data of fetchedData){
+      for(const index in paymentMode){
+        // console.log(index+":"+paymentOptions[index])
+        if(data.paymentMode == paymentMode[index]){
+          this.dataMode[index]++;
+          console.log("OK!"+this.dataMode[index])
+        }
+      }
+    }
+    // console.log("THis is a block:"+this.dataValues);
+    return this.dataMode
   }
 
   ngOnInit(): void {
@@ -206,7 +303,7 @@ export class DetailComponent implements OnInit, AfterViewInit {
     //THIS ALSO REFLECTS IN THE DB
     this.editNav= !this.editNav;
     console.log('Inside detail component');
-    console.log(content);
+    // console.log(content);
   }
 
   announceSortChange(sortState: Sort) {
@@ -220,10 +317,13 @@ export class DetailComponent implements OnInit, AfterViewInit {
   filterTable(value): void{
     this.filterValue = value;
     this.dataSource.filter = this.filterValue.trim().toLowerCase();
+    console.log(this.dataSource)
   }
 
   resetFilter(): void{
     this.filterValue = '';
+    this.category = '';
+    this.payment = '';
     this.dataSource.filter = this.filterValue.trim().toLowerCase();
     this.cashInToggle.checked = false;
     this.cashOutToggle.checked = false;
