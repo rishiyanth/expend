@@ -42,36 +42,6 @@
     <mat-sidenav-content>
 
       <!--FORM-->
-
-      <!-- <mat-card>
-        <button mat-raised-button color="primary" (click)="toggleRightNav()">Add entry</button>
-      </mat-card> -->
-    
-      <!-- <mat-accordion>
-        <mat-expansion-panel hideToggle>
-          <mat-expansion-panel-header>
-            <mat-panel-title>
-              This is the expansion title
-            </mat-panel-title>
-            <mat-panel-description>
-              This is a summary of the content
-            </mat-panel-description>
-          </mat-expansion-panel-header>
-          <p>This is the primary content of the panel.</p>
-        </mat-expansion-panel>
-        <mat-expansion-panel (opened)="panelOpenState = true"
-                             (closed)="panelOpenState = false">
-          <mat-expansion-panel-header>
-            <mat-panel-title>
-              Self aware panel
-            </mat-panel-title>
-            <mat-panel-description>
-              Currently I am {{panelOpenState ? 'open' : 'closed'}}
-            </mat-panel-description>
-          </mat-expansion-panel-header>
-          <p>I'm visible because I am open</p>
-        </mat-expansion-panel>
-      </mat-accordion> -->
       <mat-card class="example-card">
             Total Cash In:
             <p id='cashin'></p>
@@ -84,41 +54,43 @@
           Total Balance:
           <p id='cashbalance'></p>
       </mat-card>
-      <!-- <mat-card let element="totalCashIn">
-          Total Cash In: {{}}
-      </mat-card> -->
     
       <mat-card>
-        <button mat-raised-button color="primary" (click)="toggleRightNav()">Add entry</button>
+        <div>
+          <button mat-raised-button color="primary" (click)="toggleRightNav()" style='margin-right:16px'>Add entry</button>
+          <button mat-raised-button color="primary" (click)="resetFilter()" style='margin-right:16px'>Reset filters</button>
+          <button mat-raised-button color="primary" (click)="exporter.exportTable('xlsx')" style='margin-right:16px'>To Excel</button>  
+        </div>
+        <br>
+        <div class="example-div">
+          <mat-button-toggle-group name="typeFilter" aria-label="typeFilter" (change)="filterTable($event.value)">
+            <mat-button-toggle value="cash in" #cashInToggle>Cash In</mat-button-toggle>
+            <mat-button-toggle value="cash out" #cashOutToggle>Cash Out</mat-button-toggle>
+          </mat-button-toggle-group>
+        </div>
 
-        <mat-button-toggle-group name="typeFilter" aria-label="typeFilter" (change)="filterTable($event.value)">
-          <mat-button-toggle value="cash in" #cashInToggle>Cash In</mat-button-toggle>
-          <mat-button-toggle value="cash out" #cashOutToggle>Cash Out</mat-button-toggle>
-        </mat-button-toggle-group>
+        <div class="example-div">
+          <mat-form-field appearance="outline">
+            <mat-label>Category</mat-label>
+            <mat-select (selectionChange)="filterTable($event.value)" [(ngModel)]="category">
+              <mat-option value=''>Choose</mat-option>
+              <mat-option *ngFor="let category of categories" value={{category}} >{{category}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
 
-        <mat-form-field appearance="outline">
-          <mat-label>Category</mat-label>
-          <mat-select (selectionChange)="filterTable($event.value)" [(ngModel)]="category">
-            <mat-option value=''>Choose</mat-option>
-            <mat-option *ngFor="let category of categories" value={{category}} >{{category}}</mat-option>
-          </mat-select>
-        </mat-form-field>
+        <div class="example-div">
+          <mat-form-field appearance="outline">
+            <mat-label>Mode of Payment</mat-label>
+            <mat-select (selectionChange)="filterTable($event.value)" [(ngModel)]="payment">
+              <mat-option value=''>Choose</mat-option>
+              <mat-option value='Cash' >Cash</mat-option>
+              <mat-option value='Online' >Online</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
 
-        <mat-form-field appearance="outline">
-          <mat-label>Mode of Payment</mat-label>
-          <mat-select (selectionChange)="filterTable($event.value)" [(ngModel)]="payment">
-            <mat-option value=''>Choose</mat-option>
-            <mat-option value='Cash' >Cash</mat-option>
-            <mat-option value='Online' >Online</mat-option>
-          </mat-select>
-        </mat-form-field>
-
-        <button mat-raised-button color="primary" (click)="resetFilter()">Reset</button>
-
-        <button mat-raised-button color="primary" (click)="exporter.exportTable('xlsx')">To Pdf</button>
-        <button mat-raised-button color="primary" (click)="exporter.exportTable('xlsx')">To Excel</button>
-
-
+        
       </mat-card>
 
       <!-- TABLE -->
