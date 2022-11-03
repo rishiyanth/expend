@@ -209,19 +209,19 @@ export class DetailComponent implements OnInit, AfterViewInit {
   public chartDataType = [ {
     data: this.evalChartType(ELEMENT_DATA)
   } ];
-  
+
 
   constructor(private liveAnnouncer: LiveAnnouncer) {}
 
   calTotalCashIn(fetchedData: any){
       for (const data of fetchedData){
         // console.log(data);
-        if(data.type == 'Cash Out')
+        if(data.type === 'Cash Out')
         {
           this.totalCashOut += data.amount;
         }
-        if(data.type == 'Cash In')
-        { 
+        if(data.type === 'Cash In')
+        {
           this.totalCashIn += data.amount;
         }
         // console.log(this.totalCashIn+" "+this.totalCashOut)
@@ -233,42 +233,42 @@ export class DetailComponent implements OnInit, AfterViewInit {
     for(const data of fetchedData){
       for(const index in paymentOptions){
         // console.log(index+":"+paymentOptions[index])
-        if(data.category == paymentOptions[index]){
+        if(data.category === paymentOptions[index]){
           this.dataCategories[index]++;
           // console.log("OK!"+this.dataValues[index])
         }
       }
     }
     // console.log("THis is a block:"+this.dataValues);
-    return this.dataCategories
+    return this.dataCategories;
   }
 
-  evalChartType(fetchedData:any){
+  evalChartType(fetchedData: any){
     for(const data of fetchedData){
       for(const index in paymentOptions){
         // console.log(index+":"+paymentOptions[index])
-        if(data.type == paymentType[index]){
+        if(data.type === paymentType[index]){
           this.dataType[index]++;
-          console.log("OK!"+this.dataType[index])
+          console.log('OK!'+this.dataType[index]);
         }
       }
     }
     // console.log("THis is a block:"+this.dataValues);
-    return this.dataType
+    return this.dataType;
   }
 
-  evalChartMode(fetchedData:any){
+  evalChartMode(fetchedData: any){
     for(const data of fetchedData){
       for(const index in paymentMode){
         // console.log(index+":"+paymentOptions[index])
-        if(data.paymentMode == paymentMode[index]){
+        if(data.paymentMode === paymentMode[index]){
           this.dataMode[index]++;
-          console.log("OK!"+this.dataMode[index])
+          console.log('OK!'+this.dataMode[index]);
         }
       }
     }
     // console.log("THis is a block:"+this.dataValues);
-    return this.dataMode
+    return this.dataMode;
   }
 
   ngOnInit(): void {
@@ -317,7 +317,7 @@ export class DetailComponent implements OnInit, AfterViewInit {
   filterTable(value): void{
     this.filterValue = value;
     this.dataSource.filter = this.filterValue.trim().toLowerCase();
-    console.log(this.dataSource)
+    console.log(this.dataSource);
   }
 
   resetFilter(): void{

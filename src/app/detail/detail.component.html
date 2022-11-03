@@ -1,5 +1,4 @@
 <div>
-
   <mat-sidenav-container class="example-container">
 
     <!-- CASH FORM -->
@@ -42,60 +41,90 @@
     <mat-sidenav-content>
 
       <!--FORM-->
-      <mat-card class="example-card">
-            Total Cash In:
-            <p id='cashin'></p>
-      </mat-card>
-      <mat-card class="example-card">
-          Total Cash Out: 
-          <p id='cashout'></p>
-      </mat-card>
-      <mat-card class="example-card">
-          Total Balance:
-          <p id='cashbalance'></p>
-      </mat-card>
+
+      <div class="gist-container">
+
+        <mat-card class="gist-card" color="accent">
+          <mat-card-header class="gist-header">
+            <!-- <div class="gist-icon"><mat-icon>arrow_upward</mat-icon></div> -->
+            <mat-card-title  id='cashin' class="stat"></mat-card-title>
+          </mat-card-header>
+          <!-- <mat-divider></mat-divider> -->
+          <mat-card-content>
+            <p class="stat-title">{{"Cash In" | uppercase}}</p>
+          </mat-card-content>
+        </mat-card>
+
+        <mat-card class="gist-card">
+          <mat-card-header>
+            <!-- <mat-icon class="gist-icon">arrow_downward</mat-icon> -->
+            <mat-card-title id='cashout' class="stat"></mat-card-title>
+          </mat-card-header>
+          <!-- <mat-divider></mat-divider> -->
+          <mat-card-content>
+            <p class="stat-title">{{"Cash Out" | uppercase}}</p>
+          </mat-card-content>
+        </mat-card>
+
+        <mat-card class="gist-card">
+          <mat-card-header>
+            <!-- <mat-icon class="gist-icon">account_balance</mat-icon> -->
+            <mat-card-title id='cashbalance' class="stat"></mat-card-title>
+          </mat-card-header>
+          <!-- <mat-divider></mat-divider> -->
+          <mat-card-content>
+            <p class="stat-title">{{"Balance" | uppercase}}</p>
+          </mat-card-content>
+        </mat-card>
+
+      </div>
+
     
-      <mat-card>
+      <mat-card class="actions-container">
+
+        <div class="actions-filters-container">
+          <div class="filter">
+            <mat-button-toggle-group name="typeFilter" aria-label="typeFilter" (change)="filterTable($event.value)" class="filter-toggle">
+              <mat-button-toggle value="cash in" #cashInToggle>Cash In</mat-button-toggle>
+              <mat-button-toggle value="cash out" #cashOutToggle>Cash Out</mat-button-toggle>
+            </mat-button-toggle-group>
+          </div>
+  
+          <div class="filter">
+            <mat-form-field appearance="outline" color="accent">
+              <mat-label>Category</mat-label>
+              <mat-select (selectionChange)="filterTable($event.value)" [(ngModel)]="category" class="filter-select">
+                <mat-option value=''>Choose</mat-option>
+                <mat-option *ngFor="let category of categories" value={{category}} >{{category}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+  
+          <div class="filter">
+            <mat-form-field appearance="outline" color="accent">
+              <mat-label>Mode of Payment</mat-label>
+              <mat-select (selectionChange)="filterTable($event.value)" [(ngModel)]="payment">
+                <mat-option value=''>Choose</mat-option>
+                <mat-option value='Cash' >Cash</mat-option>
+                <mat-option value='Online' >Online</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+          <button mat-raised-button color="primary" (click)="resetFilter()" style='margin-right:16px'>Reset filters</button>
+
+        </div>
+
         <div>
           <button mat-raised-button color="primary" (click)="toggleRightNav()" style='margin-right:16px'>Add entry</button>
-          <button mat-raised-button color="primary" (click)="resetFilter()" style='margin-right:16px'>Reset filters</button>
           <button mat-raised-button color="primary" (click)="exporter.exportTable('xlsx')" style='margin-right:16px'>To Excel</button>  
         </div>
-        <br>
-        <div class="example-div">
-          <mat-button-toggle-group name="typeFilter" aria-label="typeFilter" (change)="filterTable($event.value)">
-            <mat-button-toggle value="cash in" #cashInToggle>Cash In</mat-button-toggle>
-            <mat-button-toggle value="cash out" #cashOutToggle>Cash Out</mat-button-toggle>
-          </mat-button-toggle-group>
-        </div>
 
-        <div class="example-div">
-          <mat-form-field appearance="outline">
-            <mat-label>Category</mat-label>
-            <mat-select (selectionChange)="filterTable($event.value)" [(ngModel)]="category">
-              <mat-option value=''>Choose</mat-option>
-              <mat-option *ngFor="let category of categories" value={{category}} >{{category}}</mat-option>
-            </mat-select>
-          </mat-form-field>
-        </div>
-
-        <div class="example-div">
-          <mat-form-field appearance="outline">
-            <mat-label>Mode of Payment</mat-label>
-            <mat-select (selectionChange)="filterTable($event.value)" [(ngModel)]="payment">
-              <mat-option value=''>Choose</mat-option>
-              <mat-option value='Cash' >Cash</mat-option>
-              <mat-option value='Online' >Online</mat-option>
-            </mat-select>
-          </mat-form-field>
-        </div>
-
-        
       </mat-card>
 
       <!-- TABLE -->
 
-      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort (matSortChange)="announceSortChange($event)" matTableExporter #exporter="matTableExporter">
+      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 data-table" matSort (matSortChange)="announceSortChange($event)" matTableExporter #exporter="matTableExporter">
 
         <!-- Date Column -->
         <ng-container matColumnDef="date">

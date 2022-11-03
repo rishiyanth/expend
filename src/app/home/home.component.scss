@@ -1,3 +1,195 @@
 :host {
   
 }
+
+.container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+//   background: url(../../assets/background1.jpg) no-repeat center center;
+//   -webkit-background-size: cover; /* pour anciens Chrome et Safari */
+//   background-size: cover; /* version standardisée */
+
+  .title {
+    // color: white;
+    // margin: 0;
+    // padding: 50px 20px;
+
+    font-family: "Oswald", sans-serif;
+    text-transform: uppercase;
+    font-size: 4.4em;
+    padding: 50px 20px;
+    font-weight: 700;
+    margin: 0;
+  }
+
+  a {
+    color: #fff;
+    text-transform: uppercase;
+    text-decoration: none;
+    background: #ed3330;
+    padding: 20px;
+    border-radius: 5px;
+    display: inline-block;
+    border: none;
+    transition: all 0.4s ease 0s;
+
+    &:hover {
+      background: #fff;
+      color: #ed3330;
+      letter-spacing: 1px;
+      -webkit-box-shadow: 0px 5px 40px -10px rgba(0,0,0,0.57);
+      -moz-box-shadow: 0px 5px 40px -10px rgba(0,0,0,0.57);
+      box-shadow: 5px 40px -10px rgba(0,0,0,0.57);
+      transition: all 0.4s ease 0s;
+    }
+  }
+}
+
+.wrapper {
+    display: grid;
+    place-content: center;
+    background-color: var(--background-color);
+    min-height: 100vh;
+    font-family: "Oswald", sans-serif;
+    font-size: clamp(1.5rem, 1rem + 18vw, 15rem);
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--text-color);
+
+    // a{
+    //     color: #fff;
+    //     text-transform: uppercase;
+    //     text-decoration: none;
+    //     background: #ed3330;
+    //     padding: 20px;
+    //     border-radius: 5px;
+    //     display: inline-block;
+    //     border: none;
+    //     transition: all 0.4s ease 0s;
+    //     font-size: clamp(1rem, 0.5rem + 1vw, 5rem);
+
+    
+    //     &:hover {
+    //       background: #fff;
+    //       color: #ed3330;
+    //       letter-spacing: 1px;
+    //       -webkit-box-shadow: 0px 5px 40px -10px rgba(0,0,0,0.57);
+    //       -moz-box-shadow: 0px 5px 40px -10px rgba(0,0,0,0.57);
+    //       box-shadow: 5px 40px -10px rgba(0,0,0,0.57);
+    //       transition: all 0.4s ease 0s;
+    //     }
+    // }
+
+  }
+  
+  .style-text {
+    grid-area: 1/1/-1/-1;
+  }
+  .top {
+    clip-path: polygon(0% 0%, 100% 0%, 100% 48%, 0% 58%);
+  }
+  .bottom {
+    clip-path: polygon(0% 60%, 100% 50%, 100% 100%, 0% 100%);
+    color: transparent;
+    background: -webkit-linear-gradient(177deg, black 53%, var(--text-color) 65%);
+    background: linear-gradient(177deg, black 53%, var(--text-color) 65%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    transform: translateX(-0.02em);
+  }
+
+  .link {
+    height: 30px;
+    align-items: center;
+    color: white;
+    text-decoration: none;
+    display: flex;
+    font-family: "Quicksand", sans-serif;
+  }
+  
+  /* Hide extra text */
+  .mask {
+    position: relative;
+    padding: 0;
+    height: 20px;
+  
+    /*  Remove overflow to see how it works　:) */
+    overflow: hidden;
+  }
+  
+  .link-container {
+    transition: transform 0.4s ease;
+  }
+  
+  .title {
+    display: block;
+  
+    /*  Set same font-size and line height  */
+    font-size: 20px;
+    line-height: 20px;
+  
+    transition: transform 0.4s ease;
+  }
+  
+  .link-title1 {
+    transform-origin: right center;
+  }
+  
+  .link-title2 {
+    transform-origin: left center;
+    transform: rotate(20deg);
+  }
+  
+  .link-icon {
+    position: relative;
+    width: 35px;
+    height: 35px;
+    background: #191919;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 10px;
+  
+    /*  Remove overflow to see how it works　:) */
+    overflow: hidden;
+  }
+  
+  .icon {
+    display: block;
+    position: absolute;
+    transition: transform 0.4s ease;
+  }
+  
+  .icon:nth-child(2) {
+    transform: translate(-40px);
+  }
+  
+  /* Hover Action*/
+  
+  /* Move up two texts (20px = font-size) */
+  .link:hover .link-container {
+    transform: translateY(-20px);
+  }
+  
+  /* Rotate texts a little bit */
+  .link:hover .link-title1 {
+    transform: rotate(20deg);
+  }
+  
+  .link:hover .link-title2 {
+    transform: rotate(0);
+  }
+  
+  /* Move arrows to right */
+  .link:hover .icon:first-child {
+    transform: translate(40px);
+  }
+  
+  .link:hover .icon:nth-child(2) {
+    transform: translate(0px);
+  }
