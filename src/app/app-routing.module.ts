@@ -4,13 +4,8 @@ import { PageNotFoundComponent } from './shared/components';
 
 import { HomeRoutingModule } from './home/home-routing.module';
 import { DetailRoutingModule } from './detail/detail-routing.module';
-import { HappybirthdayComponent } from './happybirthday/happybirthday.component';
 
 const routes: Routes = [
-  {
-    path: 'happybirthday',
-    component: HappybirthdayComponent
-  },
   {
     path: '',
     redirectTo: 'home',
