@@ -79,7 +79,6 @@
 
       </div>
 
-    
       <mat-card class="actions-container">
 
         <div class="actions-filters-container">
@@ -172,50 +171,84 @@
       </mat-paginator>
       <br>
 
-      <mat-card>
-        <div>
-          <mat-label>STATS</mat-label>
-        </div>
-        <!--<mat-select (selectionChange)="filterTable($event.value)" [(ngModel)]="payment">
-          <mat-option value=''>Choose</mat-option>
-          <mat-option value='pie' >Pie chart</mat-option>
-          <mat-option value='online' ></mat-option>
-        </mat-select> -->
-        <div class="example-canvas"> 
-          <canvas baseChart
-            [type]="'pie'"
-            [datasets]="chartDataCategory"
-            [labels]="chartLabelCategory"
-            [options]="pieChartOptions"
-            [plugins]="chartPlugins"
-            [legend]="chartLegend">
-          </canvas>
-        </div>
-        
-        <div class="example-canvas">
-          <canvas baseChart
-            [type]="'pie'"
-            [datasets]="chartDataType"
-            [labels]="chartLabelType"
-            [options]="pieChartOptions"
-            [plugins]="chartPlugins"
-            [legend]="chartLegend"
-            class="example-canvas">
-          </canvas>
-        </div>   
+      <!-- STATTISTICS SECTIONS -->  
 
-        <div class="example-canvas"> 
-          <canvas baseChart
-            [data]="barChartData"
-            [options]="barChartOptions"
-            [plugins]="chartPlugins"
-            [legend]="chartLegend"
-            [type]="'bar'"
-            class="example-canvas">
-          </canvas>
-        </div>
+      <div class="chart-container">
+        <mat-card class="chart-card">
 
-      </mat-card>
+          <mat-card-header>
+            <mat-card-title>Categories</mat-card-title>
+          </mat-card-header>
+          <mat-divider></mat-divider>
+          <mat-card-content>
+            <div class="example-canvas"> 
+              <canvas baseChart
+                width="300px"
+                [type]="'pie'"
+                [datasets]="chartDataCategory"
+                [labels]="chartLabelCategory"
+                [options]="pieChartOptions"
+                [plugins]="chartPlugins"
+                [legend]="chartLegend">
+              </canvas>
+            </div>
+          </mat-card-content>
+  
+        </mat-card>
+  
+        <mat-card class="chart-card">
+  
+          <mat-card-header>
+            <mat-card-title>Mode Of Payment</mat-card-title>
+          </mat-card-header>
+          <mat-divider></mat-divider>
+          <mat-card-content>
+            <div class="example-canvas">
+              <canvas baseChart
+                width="300px"
+                [type]="'pie'"
+                [datasets]="chartDataType"
+                [labels]="chartLabelType"
+                [options]="pieChartOptions"
+                [plugins]="chartPlugins"
+                [legend]="chartLegend"
+                class="example-canvas">
+              </canvas>
+            </div> 
+          </mat-card-content>
+  
+        </mat-card>
+          
+        <mat-card class="chart-card">
+  
+          <mat-card-header>
+            <mat-card-title>Type Of Payment</mat-card-title>
+          </mat-card-header>
+          <mat-divider></mat-divider>
+          <mat-card-content>
+            <div class="example-canvas">
+              <div class="example-canvas"> 
+                <canvas baseChart
+                  width="450px"
+                  [data]="barChartData"
+                  [options]="barChartOptions"
+                  [plugins]="chartPlugins"
+                  [legend]="chartLegend"
+                  [type]="'bar'"
+                  class="example-canvas">
+                </canvas>
+              </div>
+            </div> 
+          </mat-card-content>
+  
+        </mat-card>
+      </div>
+
+
+  
+
+
+
 
     </mat-sidenav-content>
   </mat-sidenav-container>
@@ -229,3 +262,10 @@
   </mat-drawer-container> -->
 
 </div>
+
+
+        <!--<mat-select (selectionChange)="filterTable($event.value)" [(ngModel)]="payment">
+          <mat-option value=''>Choose</mat-option>
+          <mat-option value='pie' >Pie chart</mat-option>
+          <mat-option value='online' ></mat-option>
+        </mat-select> -->

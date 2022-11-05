@@ -183,33 +183,103 @@ export class DetailComponent implements OnInit, AfterViewInit {
   //FOR PIE CHART BASED ON CATEGORY
 
   public pieChartOptions: ChartOptions<'pie'> = {
-    responsive: false,
+    responsive: true,
+    plugins: {
+      legend: {
+        labels: {
+          color: 'white',
+          font: {
+            size: 14
+          }
+        }
+      }
+    },
   };
   public chartLabelCategory = paymentOptions;
   public chartDataCategory = [ {
-    data: this.evalChartCategories(ELEMENT_DATA)
+    backgroundColor: [
+      '#7ac4fc',
+      '#2d9efc',
+      '#1f79cd',
+      '#11589c',
+      '#04396f',
+    ],
+    borderColor: 'rgba(255, 255, 255, 0.4)',
+    color: '#ffffff',
+    data: this.evalChartCategories(ELEMENT_DATA),
   } ];
   public chartLegend = true;
   public chartPlugins = [];
 
+  // '#220631',
+  // '#622769',
+  // '#c86b99',
+  // '#efa09e',
+  // '#fec2a3',
+  // '#fc9d82'
+
   //FOR BAR CHART
 
   public barChartOptions: ChartConfiguration<'bar'>['options'] = {
-    responsive: false,
+    plugins: {
+      legend: {
+        labels: {
+          color: 'white',
+          font: {
+            size: 14
+          }
+        }
+      }
+    },
+    scales: {
+      y: {
+        ticks: {
+          color: 'white',
+          font: {
+            size: 14,
+          },
+          stepSize: 1,
+        }
+      },
+      x: {
+        ticks: {
+          color: 'white',
+          font: {
+            size: 14
+          },
+          stepSize: 1,
+        }
+      }
+    }
   };
 
   public barChartData: ChartConfiguration<'bar'>['data'] = {
     labels: paymentMode,
-    datasets: [{data: this.evalChartMode(ELEMENT_DATA),label: 'Total expenses'}]
+    datasets: [{
+      data: this.evalChartMode(ELEMENT_DATA),
+      label: 'Total expenses',
+      backgroundColor: '#673cb5',
+      borderColor: '#000000',
+      hoverBackgroundColor: '#9c8afc',
+    }],
   };
 
   //FOR PIE CHART BASED ON TYPE
 
   public chartLabelType = paymentType;
   public chartDataType = [ {
-    data: this.evalChartType(ELEMENT_DATA)
+    backgroundColor: [
+      '#9d4fda',
+      '#5a1b99',
+      '#c67efd',
+      '#dfabfd',
+      '#7b2dbc',
+      '#240145',
+    ],
+    borderColor: 'rgba(255, 255, 255, 0.4)',
+    color: '#ffffff',
+    data: this.evalChartType(ELEMENT_DATA),
   } ];
-
 
   constructor(private liveAnnouncer: LiveAnnouncer) {}
 
